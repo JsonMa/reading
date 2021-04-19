@@ -2,7 +2,7 @@
 
 exports.mongoose = {
   client: {
-    url: 'mongodb://localhost:27017/cqerp',
+    url: 'mongodb://127.0.0.1/cqerp',
     options: {
       user: 'cqerp',
       pass: 'cqerp123456',
