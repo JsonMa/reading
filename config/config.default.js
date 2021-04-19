@@ -28,8 +28,11 @@ module.exports = () => {
 
   exports.mongoose = {
     client: {
-      url: 'mongodb://127.0.0.1/reading',
-      options: {}
+      url: 'mongodb://127.0.0.1/cqerp',
+      options: {
+        user: 'cqerp',
+        pass: 'cqerp123456',
+      }
     }
   };
 
