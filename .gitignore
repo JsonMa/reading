@@ -1,0 +1,17 @@
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+.DS_Store
+*.swp
+yarn.lock
+.travis.yml
+.vscode
+package-lock.json
+config/config.local.js
+config/config.unittest.js
+jsdoc
+.nyc_output
+files/

@@ -1,0 +1,75 @@
+stages:
+  - lint
+  - build
+  - test
+  - deploy
+
+variables:
+  EGG_SERVER_ENV: ci 
+  Host: localhost
+  POSTGRES_DB: huayan
+  POSTGRES_USER: postgres 
+  POSTGRES_PASSWORD: root 
+
+eslint:
+  stage: lint 
+  tags:
+    - shell
+  script:
+    - npm run lint
+  only:
+    - branches
+  except:
+    - develop
+    - master
+
+branch_name:
+  stage: lint
+  tags:
+    - shell
+  only:
+    - branches
+  except:
+    - master
+    - develop
+  script:
+    - node -e "assert(process.env.CI_BUILD_REF_NAME.match('(feature|bug|hotfix|dev)[a-zA-Z_]+'))"
+
+# test: 
+#   image: harbor.ioteams.com/saas/shubangv2-base
+#   stage: test
+#   only:
+#     - branches
+#   except:
+#     - develop
+#     - master 
+#   tags:
+#     - docker registry
+#   before_script:
+#     - mkdir -p files
+#     - ln -s /app/node_modules node_modules
+#   script: 
+#     - npm test
+#   services: 
+#     - redis:3.2
+#     - postgres:9.6.5
+
+# coverage: 
+#   image: harbor.ioteams.com/saas/shubangv2-base
+#   stage: test
+#   only:
+#     - branches
+#   except:
+#     - develop
+#     - master 
+#   tags:
+#     - docker registry
+#   before_script:
+#     - mkdir -p files
+#     - mkdir .nyc_output
+#     - ln -s /app/node_modules node_modules
+#   script: 
+#     - npm run cov
+#   services: 
+#     - redis:3.2
+#     - postgres:9.6.5
