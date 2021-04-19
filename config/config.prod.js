@@ -2,16 +2,19 @@
 
 exports.mongoose = {
   client: {
-    url: 'mongodb://reading:reading_123456@127.0.0.1/tracing_u',
-    options: {}
-  }
+    url: 'mongodb://localhost:27017/cqerp',
+    options: {
+      user: 'cqerp',
+      pass: 'cqerp123456',
+    },
+  },
 };
 
 exports.redis = {
   client: {
     port: 6379,
     host: 'localhost',
-    password: 'reading_123456',
+    password: '',
     db: 0
   }
 };
