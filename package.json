@@ -46,8 +46,8 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=tracing_u",
-    "stop": "egg-scripts stop --title=tracing_u",
+    "start": "egg-scripts start --daemon --title=reading",
+    "stop": "egg-scripts stop --title=reading",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "report": "egg-bin cov",
@@ -64,7 +64,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JsonMa/server_tracing_u"
+    "url": "https://github.com/JsonMa/reading"
   },
   "author": "jsonma",
   "license": "MIT"

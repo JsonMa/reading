@@ -113,6 +113,7 @@ module.exports = app => {
               await ctx.service.record.update({
                 _id: record._id,
               }, {
+                reward,
                 isEnd: true,
               }); // 修改问卷状态
               await ctx.service.user.update({ openid }, { reward: targetCommodity.index });
