@@ -11,7 +11,6 @@ yarn.lock
 .vscode
 package-lock.json
 config/config.local.js
-config/config.unittest.js
 jsdoc
 .nyc_output
 files/
