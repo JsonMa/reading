@@ -59,7 +59,7 @@ module.exports = app => {
       ctx.error(record.openid === openid, 12000, '非自己的问卷不能领奖');
       ctx.error(!record.isEnd, 12004, '已关闭的问卷不能领奖');
       ctx.error(record[`level${reward}Score`] === 10, 12001, '未完成问卷不能领奖');
-      ctx.error(record.totalScore === reward * 10, 12006, '未完成问卷不能领奖');
+      ctx.error(record.totalScore === reward * 10, 12001, '未完成问卷不能领奖');
 
       const lockBeginTime = Date.now();
       let isTimeOut = false;
