@@ -68,7 +68,7 @@ describe('test/app/controller/order.test.js', () => {
       .set('access_token', this.accessToken)
       .send({
         record_id: targetRecord._id,
-        reward: 1, // 第一关奖励
+        reward: '1', // 第一关奖励
         name: 'jsonma',
         phone: '13896120441',
         area: '重庆市渝北区',
@@ -111,7 +111,7 @@ describe('test/app/controller/order.test.js', () => {
       .set('access_token', this.accessToken)
       .send({
         record_id: targetRecord._id,
-        reward: 3,
+        reward: '3',
         name: 'jsonma',
         phone: '13896120441',
         area: '重庆市渝北区',
@@ -147,7 +147,7 @@ describe('test/app/controller/order.test.js', () => {
       .set('access_token', this.accessToken)
       .send({
         record_id: targetRecord._id,
-        reward: 1,
+        reward: '1',
         name: 'jsonma',
         phone: '13896120441',
         area: '重庆市渝北区',
