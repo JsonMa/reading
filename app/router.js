@@ -18,6 +18,7 @@ module.exports = app => {
 
   // questions
   app.get(`${prefix}/questions`, 'question.index'); // 领取题目
+  app.get(`${prefix}/questions/chance`, 'question.chance'); // 获取答题次数
   app.post(`${prefix}/questions/:id/answer`, 'question.answer'); // 提交答案
   app.post(`${prefix}/questions/:id/close`, 'question.close'); // 关闭答题
 

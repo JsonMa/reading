@@ -80,5 +80,9 @@ module.exports = () => {
     },
   };
 
+  exports.questions = {
+    chance: 1000,
+  };
+
   return exports;
 };

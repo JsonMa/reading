@@ -18,6 +18,7 @@ module.exports = app => {
     async index() {
       const { ctx } = this;
       const { openid } = ctx.loginPermission();
+      const chance = ctx.app.config.questions.chance;
       // 判断活动是否开始
       ctx.error(moment() > moment('2021-04-17T23:59:59'), 11000, '活动未开始！');
       ctx.error(moment() < moment('2021-04-24T23:59:59'), 11001, '活动已结束！');
@@ -33,7 +34,7 @@ module.exports = app => {
           $lt: endDate,
         },
       });
-      ctx.error(records && records.length < 3, 11002, '今日答题次数已超过3次,请明天再来吧！');
+      ctx.error(records && records.length < chance, 11002, '今日答题次数已超过3次,请明天再来吧！');
 
       // 随机获取30道题目
       const questionaire = {}; // 生成试卷
@@ -62,7 +63,7 @@ module.exports = app => {
       });
       questionaire.id = record._id;
       ctx.error(record, 11003, '问卷生成失败');
-      const leftChance = 3 - records.length - 1; // 剩余机会
+      const leftChance = chance - records.length - 1; // 剩余机会
       questionaire.left_chance = leftChance >= 0 ? leftChance : 0;
 
       await ctx.app.redis.set(`questionaire:${questionaire.id}`, JSON.stringify({
@@ -73,6 +74,38 @@ module.exports = app => {
 
       ctx.jsonBody = {
         data: questionaire,
+      };
+    }
+
+    /**
+     * 查看剩余次数
+     *
+     * @memberof QuestionController
+     * @return {array} 问卷
+     */
+    async chance() {
+      const { ctx } = this;
+      const { openid } = ctx.loginPermission();
+      // 判断活动是否开始
+      ctx.error(moment() > moment('2021-04-17T23:59:59'), 11000, '活动未开始！');
+      ctx.error(moment() < moment('2021-04-24T23:59:59'), 11001, '活动已结束！');
+
+      // 判断是否具备答题条件
+      const currentTime = new Date();
+      const startDate = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate());
+      const endDate = new Date(startDate.getTime() + 86400000);
+      const records = await ctx.service.record.findMany({
+        openid,
+        time: {
+          $gte: startDate,
+          $lt: endDate,
+        },
+      });
+      const leftChance = ctx.app.config.questions.chance - records.length; // 剩余机会
+      ctx.jsonBody = {
+        data: {
+          chance: leftChance,
+        },
       };
     }
 

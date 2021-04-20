@@ -70,7 +70,7 @@ module.exports = app => {
             if (!isTimeOut) result = await ctx.app.redis.setnx('lock', 'key');
             if (result) {
               clearInterval(timer);
-              await ctx.app.redis.expire('lock', 5); // 锁过期时间10s
+              await ctx.app.redis.expire('lock', 5); // 锁过期时间5s
               const commodities = await ctx.service.commodity.findMany({}, null, {
                 sort: {
                   index: 'asc',

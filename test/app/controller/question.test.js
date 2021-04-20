@@ -41,6 +41,16 @@ describe('test/app/controller/question.test.js', () => {
     this.questionaires = results;
   });
 
+  it('should get three questionaires', async () => {
+    const resp = await app.httpRequest()
+      .get('/api/questions/chance')
+      .set('access_token', this.accessToken)
+      .expect(200);
+    assert.equal(resp.body.code, 0);
+    assert.equal(resp.body.data.data.chance, 0);
+  });
+
+
   it('should get over times error', async () => {
     const resp = await app.httpRequest()
       .get('/api/questions')
