@@ -19,6 +19,8 @@ describe('test/app/controller/user.test.js', () => {
   });
 
   after(async () => {
+    await app.model.Record.remove(); // 清除答题记录
+    await app.model.Order.remove(); // 清除领奖记录
     // 用户登出
     await app.httpRequest()
       .get('/api/auth/logout')
