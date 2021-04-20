@@ -219,9 +219,14 @@ module.exports = app => {
       const { token } = await ctx.verify(excelRule, ctx.request.query);
       ctx.error(token === 'gxq@123456', 12006, '无订单导出权限');
       const orders = await ctx.service.order.findMany({});
-      const data = [['微信id', '奖品名称', '联系人', '联系电话', '所在城市', '详细地址', '答题时间']];
+      const data = [['微信ID', '奖品等级', '奖品名称', '联系人', '联系电话', '所在城市', '详细地址', '答题时间']];
+      const levelHash = {
+        level1: '三等奖',
+        level2: '二等奖',
+        level3: '一等奖',
+      };
       orders.forEach(order => {
-        data.push([order.openid, order.desc, order.name, order.phone, order.area, order.address, moment(order.created_at).toString()]);
+        data.push([order.openid, levelHash[order.reward], order.desc, order.name, order.phone, order.area, order.address, moment(order.created_at).toString()]);
       });
       const buffer = xlsx.build([{ name: '中奖名单', data }]);
       ctx.attachment('阅读月活动中奖名单.xlsx');
