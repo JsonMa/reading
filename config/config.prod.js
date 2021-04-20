@@ -2,10 +2,10 @@
 
 exports.mongoose = {
   client: {
-    url: 'mongodb://127.0.0.1/cqerp',
+    url: 'mongodb://127.0.0.1/reading',
     options: {
-      user: 'cqerp',
-      pass: 'cqerp123456',
+      user: 'reading',
+      pass: 'reading123456',
     },
   },
 };
@@ -17,10 +17,4 @@ exports.redis = {
     password: '',
     db: 0
   }
-};
-
-exports.noPrefix = false;
-
-exports.auth = {
-  prefix: 'reading'
 };
