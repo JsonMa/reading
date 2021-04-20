@@ -1,5 +1,7 @@
 'use strict';
 
+const xlsx = require('node-xlsx');
+const moment = require('moment');
 module.exports = app => {
   /**
    * Order相关路由
@@ -137,7 +139,7 @@ module.exports = app => {
     }
 
     /**
-     * 获取订单列表
+     * list rule
      *
      * @readonly
      * @memberof UserController
@@ -185,6 +187,46 @@ module.exports = app => {
           count,
         },
       };
+    }
+
+    /**
+     * excel rule
+     *
+     * @readonly
+     * @memberof UserController
+     */
+    get excelRule() {
+      return {
+        properties: {
+          token: {
+            type: 'string',
+          },
+        },
+        $async: true,
+        required: ['token'],
+        additionalProperties: false,
+      };
+    }
+
+    /**
+     * order excel
+     *
+     * @memberof OrderController
+     * @return {promise} Order List
+     */
+    async excel() {
+      const { ctx, excelRule } = this;
+      const { token } = await ctx.verify(excelRule, ctx.request.query);
+      ctx.error(token === 'gxq@123456', 12006, '无订单导出权限');
+      const orders = await ctx.service.order.findMany({});
+      const data = [['微信id', '奖品名称', '联系人', '联系电话', '所在城市', '详细地址', '答题时间']];
+      orders.forEach(order => {
+        data.push([order.openid, order.desc, order.name, order.phone, order.area, order.address, moment(order.created_at).toString()]);
+      });
+      const buffer = xlsx.build([{ name: '中奖名单', data }]);
+      ctx.attachment('阅读月活动中奖名单.xlsx');
+      ctx.set('Content-Type', 'application/octet-stream');
+      ctx.body = buffer;
     }
   }
   return OrderController;

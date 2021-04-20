@@ -14,6 +14,10 @@ module.exports = () =>
         method: ['POST'],
         url: '/auth/admin/login',
       },
+      {
+        method: ['GET'],
+        url: '/orders/excel',
+      },
     ];
     for (let i = 0; i < whiteUrlLists.length; i++) {
       const item = whiteUrlLists[i];

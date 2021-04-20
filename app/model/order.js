@@ -20,7 +20,6 @@ module.exports = ({
    * @property {String}   phone            - 手机号码
    * @property {String}   area             - 所在地区
    * @property {String}   address          - 详细地址
-   * @property {Date}     submit_time      - 提交时间
    * @property {Object}   record           - 答题记录
    * @property {Object}   reward           - 奖品等级
    * @property {Object}   desc             - 奖品名称
@@ -58,7 +57,6 @@ module.exports = ({
       type: String,
       required: true,
     },
-    submit_time: Date,
   },
   Object.assign({}, {
     timestamps,

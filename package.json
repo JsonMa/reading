@@ -14,16 +14,16 @@
     "egg-mongoose": "^3.3.1",
     "egg-redis": "1.0.2",
     "egg-scripts": ">=2.8.1",
+    "egg-view-nunjucks": "^2.2.0",
     "istanbul": "0.4.5",
     "lodash": ">=4.17.13",
     "moment": "^2.19.3",
+    "node-xlsx": "^0.16.1",
     "util": "^0.10.3",
     "utility": "1.13.1",
     "uuid": "3.1.0",
     "verror": "1.10.0",
     "weixin-pay": "1.1.7",
-    "xlsx": "^0.11.6",
-    "egg-view-nunjucks": "^2.2.0",
     "xml-js": "^1.5.2"
   },
   "devDependencies": {
