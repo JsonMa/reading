@@ -17,7 +17,7 @@ module.exports = app => {
      */
     async index() {
       const { ctx } = this;
-      const isUnittest = ctx.app.agent.config.env === 'unittest';
+      const isUnittest = ctx.app.env === 'unittest';
       const { openid } = ctx.loginPermission();
       const chance = ctx.app.config.questions.chance;
       // 判断活动是否开始

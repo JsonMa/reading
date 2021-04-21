@@ -49,7 +49,7 @@ const stock = [
   },
   {
     index: 3,
-    title: '近代中国高举起俄国十月社会主义革命旗帜的第一人是（ ）',
+    title: '近代中国高举起俄国十月社会主义革命旗帜的第一人是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -210,7 +210,7 @@ const stock = [
   },
   {
     index: 10,
-    title: '中国共产党党徽为镰刀和（ ）组成的图案',
+    title: '中国共产党党徽为镰刀和（ ）组成的图案。',
     options: [
       {
         identifer: 'A',
@@ -1153,7 +1153,7 @@ const stock = [
   },
   {
     index: 51,
-    title: '下列说法无误的一项是（ ）',
+    title: '下列说法无误的一项是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1176,7 +1176,7 @@ const stock = [
   },
   {
     index: 52,
-    title: '下面名著中的人物和情节对应不正确的一项是( )',
+    title: '下面名著中的人物和情节对应不正确的一项是( )。',
     options: [
       {
         identifer: 'A',
@@ -1291,7 +1291,7 @@ const stock = [
   },
   {
     index: 57,
-    title: '选出下列说法有误的一项是（ )。',
+    title: '选出下列说法有误的一项是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1406,7 +1406,7 @@ const stock = [
   },
   {
     index: 62,
-    title: '友谊的深浅，由下列那一个成语可以看出情义最为深重？（ ）',
+    title: '友谊的深浅，由下列那一个成语可以看出情义最为深重？（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1429,7 +1429,7 @@ const stock = [
   },
   {
     index: 63,
-    title: '一提到书法中的草书，人们便会想到“颠张醉素”，请问下列属于颠张的作品的是（ ）',
+    title: '一提到书法中的草书，人们便会想到“颠张醉素”，请问下列属于颠张的作品的是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1521,7 +1521,7 @@ const stock = [
   },
   {
     index: 67,
-    title: '下列关于文学常识的说法有错误的一项是（ ）',
+    title: '下列关于文学常识的说法有错误的一项是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1544,7 +1544,7 @@ const stock = [
   },
   {
     index: 68,
-    title: '下列文学常识搭配有误的一项是( )。',
+    title: '下列文学常识搭配有误的一项是( ）。',
     options: [
       {
         identifer: 'A',
@@ -1636,7 +1636,7 @@ const stock = [
   },
   {
     index: 72,
-    title: '“生当做人杰，死亦为鬼雄，至今思项羽，不肯过江东。”为哪位诗人的作品？（ ）',
+    title: '“生当做人杰，死亦为鬼雄，至今思项羽，不肯过江东。”为哪位诗人的作品？（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1728,7 +1728,7 @@ const stock = [
   },
   {
     index: 76,
-    title: '爵是一种典礼时用的酒器，那么爵有几只脚？（ ）',
+    title: '爵是一种典礼时用的酒器，那么爵有几只脚？（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1889,7 +1889,7 @@ const stock = [
   },
   {
     index: 83,
-    title: '“形存则神存，形谢则神灭”是由谁提出的（）。',
+    title: '“形存则神存，形谢则神灭”是由谁提出的（ ）。',
     options: [
       {
         identifer: 'A',
@@ -1958,7 +1958,7 @@ const stock = [
   },
   {
     index: 86,
-    title: '宋朝著名的女词人除了大家所熟悉的李清照外，还有一位朱淑真。前者的词集叫做《漱玉词》，请问后者词集是( )。',
+    title: '宋朝著名的女词人除了大家所熟悉的李清照外，还有一位朱淑真。前者的词集叫做《漱玉词》，请问后者词集是（ ）。',
     options: [
       {
         identifer: 'A',
@@ -2096,7 +2096,7 @@ const stock = [
   },
   {
     index: 92,
-    title: '“西出阳关无故人”中的“阳关”位于现在哪个省（ ）',
+    title: '“西出阳关无故人”中的“阳关”位于现在哪个省（ ）。',
     options: [
       {
         identifer: 'A',
@@ -2211,7 +2211,7 @@ const stock = [
   },
   {
     index: 97,
-    title: '下面有关佛教故事的画卷是（ ）',
+    title: '下面有关佛教故事的画卷是（ ）。',
     options: [
       {
         identifer: 'A',
