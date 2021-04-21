@@ -129,13 +129,13 @@ module.exports = class Initiater {
       index: 1,
       level: 'level1',
       name: '巴福刺绣书签',
-      count: 500,
+      count: 300,
     },
     {
       index: 2,
       level: 'level2',
       name: '海兰云天温泉券',
-      count: 100,
+      count: 50,
     },
     {
       index: 3,
