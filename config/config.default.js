@@ -81,7 +81,7 @@ module.exports = () => {
   };
 
   exports.questions = {
-    chance: 1000,
+    chance: 5,
   };
 
   return exports;
