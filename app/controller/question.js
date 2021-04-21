@@ -17,6 +17,7 @@ module.exports = app => {
      */
     async index() {
       const { ctx } = this;
+      const isUnittest = ctx.app.agent.config.env === 'unittest';
       const { openid } = ctx.loginPermission();
       const chance = ctx.app.config.questions.chance;
       // 判断活动是否开始
@@ -34,13 +35,20 @@ module.exports = app => {
           $lt: endDate,
         },
       });
-      ctx.error(records && records.length < chance, 11002, '今日答题次数已超过3次,请明天再来吧！');
+      ctx.error(records && records.length < chance, 11002, `今日答题次数已超过${chance}次,请明天再来吧！`);
 
       // 随机获取30道题目
       const questionaire = {}; // 生成试卷
-      const selected_questions = await this.ctx.model.Question.aggregate([
+      const raw_questions = await this.ctx.model.Question.aggregate([
         { $sample: { size: 30 } },
       ]);
+      const selected_questions = raw_questions.map(question => {
+        ['answer', 'created_at', 'updated_at', 'index'].forEach(item => {
+          if (isUnittest && item === 'answer') return;
+          delete question[item];
+        });
+        return question;
+      }); // 数据过滤
       ['level1', 'level2', 'level3'].forEach((item, index) => {
         questionaire[item] = selected_questions.slice(10 * index, 10 * (index + 1));
       });

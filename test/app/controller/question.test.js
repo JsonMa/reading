@@ -125,23 +125,6 @@ describe('test/app/controller/question.test.js', () => {
     assert.equal(targetRecord.totalScore, 10);
   });
 
-  it('should close level2', async () => {
-    const level_type = 'level2';
-    const { _id: question_id } = this.questionaires[1][level_type][0];
-    const resp = await app.httpRequest()
-      .post(`/api/questions/${this.questionaires[1].id}/close`)
-      .set('access_token', this.accessToken)
-      .send({
-        question_id,
-      })
-      .expect(200);
-    assert.equal(resp.body.code, 0);
-    const targetRecord = await app.model.Record.findById(this.questionaires[1].id);
-    assert.equal(targetRecord.level1Score, 10);
-    assert.equal(targetRecord.totalScore, 10);
-    assert.equal(targetRecord.isEnd, true);
-  });
-
   it('should pass all level', async () => {
     for (let i = 1; i <= 3; i++) {
       const level_type = `level${i}`;
@@ -166,5 +149,22 @@ describe('test/app/controller/question.test.js', () => {
     assert.equal(targetRecord.level2Score, 10);
     assert.equal(targetRecord.level3Score, 10);
     assert.equal(targetRecord.totalScore, 30);
+  });
+
+  it('should close level2', async () => {
+    const level_type = 'level2';
+    const { _id: question_id } = this.questionaires[1][level_type][0];
+    const resp = await app.httpRequest()
+      .post(`/api/questions/${this.questionaires[1].id}/close`)
+      .set('access_token', this.accessToken)
+      .send({
+        question_id,
+      })
+      .expect(200);
+    assert.equal(resp.body.code, 0);
+    const targetRecord = await app.model.Record.findById(this.questionaires[1].id);
+    assert.equal(targetRecord.level1Score, 10);
+    assert.equal(targetRecord.totalScore, 10);
+    assert.equal(targetRecord.isEnd, true);
   });
 });

@@ -19,7 +19,6 @@ module.exports = ({
    * @param {String}   openid                          - 微信用户唯一识别号
    * @param {String}   reward                          - 获奖状态
    * @param {Date}     last_login                      - 最近登录时间
-   * @param {String}   phone                           - 用户微信电话
    */
 
   const schema = new Schema({
@@ -31,9 +30,6 @@ module.exports = ({
       type: String,
       enum: ['0', '1', '2', '3'],
       default: '0',
-    },
-    phone: {
-      type: String,
     },
     last_login: Date,
   },

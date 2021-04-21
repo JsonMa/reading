@@ -103,7 +103,12 @@ module.exports = app => {
       ctx.jsonBody = {
         data: {
           token: access_token,
-          user,
+          user: {
+            reward: user.reward,
+            openid: user.openid,
+            last_login: user.last_login,
+            created_at: user.created_at,
+          },
         },
       };
     }

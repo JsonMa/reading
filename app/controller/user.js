@@ -93,12 +93,23 @@ module.exports = app => {
       const { ctx } = this;
       const { openid } = ctx.loginPermission(); // 校验是否有查询自身的权限
 
-      const records = await ctx.service.record.findMany({
+      const reward = await ctx.app.model.Record.findOne({
         openid,
+        reward: {
+          $in: ['1', '2', '3'],
+        },
+      }, 'totalScore isEnd reward time'); // 查询获奖的记录
+      const records = await ctx.app.model.Record.find({
+        openid,
+        reward: '0',
+      }, 'totalScore isEnd reward time', {
+        sort: {
+          time: -1,
+        },
       });
       ctx.jsonBody = {
         data: {
-          records,
+          records: reward ? [ reward ].concat(records) : records,
         },
       };
     }
