@@ -2,6 +2,8 @@
 
 const xlsx = require('node-xlsx');
 const moment = require('moment');
+const _ = require('lodash');
+
 module.exports = app => {
   /**
    * Order相关路由
@@ -358,7 +360,7 @@ module.exports = app => {
           openid: user.openid,
         }, {
           name: user.name, // real name
-          time: Date.now() + 86400000 + 3600000 * (i + 1) + 60000 * (i + 3) + 1000 * (i + 1),
+          time: Date.now() + 43200000 + 3600000 * _.random(1, 12) + 60000 * _.random(1, 60) + 1000 * _.random(1, 60),
         });
       }
       ctx.body = { code: 0, msg: 'success' };
