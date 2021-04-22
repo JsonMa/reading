@@ -358,7 +358,7 @@ module.exports = app => {
           openid: user.openid,
         }, {
           name: user.name, // real name
-          time: Date.now() + 86400000 + 3600000 * (i + 1) + 1000 * (i + 1),
+          time: Date.now() + 86400000 + 3600000 * (i + 1) + 60000 * (i + 3) + 1000 * (i + 1),
         });
       }
       ctx.body = { code: 0, msg: 'success' };
