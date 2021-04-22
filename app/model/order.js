@@ -23,6 +23,7 @@ module.exports = ({
    * @property {Object}   record           - 答题记录
    * @property {Object}   reward           - 奖品等级
    * @property {Object}   desc             - 奖品名称
+   * @property {Object}   time             - 订单时间
    */
   const schema = new Schema({
     openid: {
@@ -57,6 +58,7 @@ module.exports = ({
       type: String,
       required: true,
     },
+    time: Date,
   },
   Object.assign({}, {
     timestamps,

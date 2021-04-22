@@ -84,6 +84,7 @@ module.exports = () => {
       {
         openid:  'oVUI94-Ud7W2JkJHOkLrzooxqKdc',
         level: 'level3',
+        rawName: 'gxq@001',
         name: '邹华',
         phone: '13896104008',
         area: '重庆市渝北区',
@@ -92,6 +93,7 @@ module.exports = () => {
       {
         openid:  'oVUI941XyLHnR-C6w4ejol4LqgUo',
         level: 'level2',
+        rawName: 'gxq@002',
         name: '马号',
         phone: '13896120331',
         area: '重庆市大足区',
@@ -100,6 +102,7 @@ module.exports = () => {
       {
         openid:  'oVUI9439oilQbfqtyNAqAEaeYJJA',
         level: 'level2',
+        rawName: 'gxq@003',
         name: '陈沉',
         phone: '13617672156',
         area: '重庆市渝北区',
@@ -107,7 +110,8 @@ module.exports = () => {
       },
       {
         openid:  'oVUI947ftlB95qN-7oqZOH_yLACc',
-        level: 'level3',
+        level: 'level2',
+        rawName: 'gxq@004',
         name: '马姣',
         phone: '15922918496',
         area: '重庆市南岸区',
@@ -116,6 +120,7 @@ module.exports = () => {
       {
         openid:  'oVUI94yaEDe7O8pJWmt9qRfXSLjs',
         level: 'level2',
+        rawName: 'gxq@005',
         name: '程成',
         phone: '15213358479',
         area: '重庆市沙坪坝区',

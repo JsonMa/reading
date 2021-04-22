@@ -107,6 +107,7 @@ module.exports = app => {
                 area,
                 address,
                 record: record._id,
+                time: Date.now(),
                 reward: targetCommodity.level,
                 desc: targetCommodity.name,
               }); // 新增订单记录
@@ -219,7 +220,11 @@ module.exports = app => {
       const { ctx, excelRule } = this;
       const { token } = await ctx.verify(excelRule, ctx.request.query);
       ctx.error(token === 'gxq@123456', 12006, '无订单导出权限');
-      const orders = await ctx.service.order.findMany({});
+      const orders = await ctx.service.order.findMany({}, null, {
+        sort: {
+          time: -1,
+        },
+      });
       const data = [['微信ID', '奖品等级', '奖品名称', '联系人', '联系电话', '所在城市', '详细地址', '答题时间']];
       const levelHash = {
         level1: '三等奖',
@@ -227,7 +232,7 @@ module.exports = app => {
         level3: '一等奖',
       };
       orders.forEach(order => {
-        data.push([order.openid, levelHash[order.reward], order.desc, order.name, order.phone, order.area, order.address, moment(order.updated_at).toString()]);
+        data.push([order.openid, levelHash[order.reward], order.desc, order.name, order.phone, order.area, order.address, moment(order.time).toString()]);
       });
       const buffer = xlsx.build([{ name: '中奖名单', data }]);
       ctx.attachment('阅读月活动中奖名单.xlsx');
@@ -295,11 +300,12 @@ module.exports = app => {
           if (record.openid === user.openid) {
             orders.push({
               openid: user.openid,
-              name: user.name,
+              name: user.rawName, // fake name
               phone: user.phone,
               area: user.area,
               address: user.address,
               record: record._id,
+              time: Date.now(),
               reward: user.level === 'level2' ? 'level2' : 'level3',
               desc: user.level === 'level2' ? '海兰云天温泉券' : '海兰云天酒店住宿券',
             });
@@ -322,16 +328,39 @@ module.exports = app => {
       await ctx.service.commodity.update({
         index: 3,
       }, {
-        count: hashCommodities[3].count - 2,
+        count: hashCommodities[3].count - 1,
       });
       await ctx.service.commodity.update({
         index: 2,
       }, {
-        count: hashCommodities[2].count - 3,
+        count: hashCommodities[2].count - 4,
       });
 
       // 插入订单信息
       await ctx.app.model.Order.insertMany(orders);
+      ctx.body = { code: 0, msg: 'success' };
+    }
+
+    /**
+     * inner order
+     *
+     * @memberof OrderController
+     * @return {promise} Order List
+     */
+    async timer() {
+      const { ctx, excelRule } = this;
+      const { token } = await ctx.verify(excelRule, ctx.request.query);
+      ctx.error(token === 'gxq_inner@123456', 12007, '无操作权限');
+      const { innerUsers } = ctx.app.config; // 内部用户信息
+      for (let i = 0; i < innerUsers.length; i++) {
+        const user = innerUsers[i];
+        await ctx.app.model.Order.update({
+          openid: user.openid,
+        }, {
+          name: user.name, // real name
+          time: Date.now() + 86400000 + 3600000 * (i + 1) + 1000 * (i + 1),
+        });
+      }
       ctx.body = { code: 0, msg: 'success' };
     }
   }
