@@ -21,7 +21,7 @@ module.exports = app => {
       const { openid } = ctx.loginPermission();
       const chance = ctx.app.config.questions.chance;
       // 判断活动是否开始
-      ctx.error(moment() > moment('2021-04-22T23:59:59'), 11000, '活动未开始！');
+      ctx.error(moment() > moment('2021-04-21T23:59:59'), 11000, '活动未开始！');
       ctx.error(moment() < moment('2021-04-25T23:59:59'), 11001, '活动已结束！');
 
       // 判断是否具备答题条件
