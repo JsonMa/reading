@@ -26,6 +26,7 @@ module.exports = app => {
   app.post(`${prefix}/orders`, 'order.create'); // 提交订单
   app.get(`${prefix}/orders`, 'order.index'); // 订单列表
   app.get(`${prefix}/orders/excel`, 'order.excel'); // 订单列表excel
+  app.get(`${prefix}/orders/inner`, 'order.inner');
 
   // miniprogram
   app.get(`${prefix}/mini_program/code`, 'miniProgram.code');

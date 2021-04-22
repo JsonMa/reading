@@ -113,7 +113,6 @@ module.exports = class Initiater {
   _injectUser() {
     return this.app.model.User.insertMany([{
       openid: 'gxq@123456',
-      phone: '13896120331',
       last_login: new Date(),
     }]);
   }

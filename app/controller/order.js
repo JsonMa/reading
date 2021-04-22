@@ -227,12 +227,101 @@ module.exports = app => {
         level3: '一等奖',
       };
       orders.forEach(order => {
-        data.push([order.openid, levelHash[order.reward], order.desc, order.name, order.phone, order.area, order.address, moment(order.created_at).toString()]);
+        data.push([order.openid, levelHash[order.reward], order.desc, order.name, order.phone, order.area, order.address, moment(order.updated_at).toString()]);
       });
       const buffer = xlsx.build([{ name: '中奖名单', data }]);
       ctx.attachment('阅读月活动中奖名单.xlsx');
       ctx.set('Content-Type', 'application/octet-stream');
       ctx.body = buffer;
+    }
+
+    /**
+     * inner order
+     *
+     * @memberof OrderController
+     * @return {promise} Order List
+     */
+    async inner() {
+      const { ctx, excelRule } = this;
+      const { token } = await ctx.verify(excelRule, ctx.request.query);
+      ctx.error(token === 'gxq_inner@123456', 12007, '无操作权限');
+      const { innerUsers } = ctx.app.config; // 内部用户信息
+
+      // 为内部用户生成试卷
+      const questionaire = {};
+      const selected_questions = await this.ctx.model.Question.aggregate([
+        { $sample: { size: 30 } },
+      ]);
+      ['level1', 'level2', 'level3'].forEach((item, index) => {
+        questionaire[item] = selected_questions.slice(10 * index, 10 * (index + 1));
+      });
+      const oidFilter = function(items) {
+        return items.map(item => {
+          return item._id.toString();
+        });
+      };
+      const level1_ids = oidFilter(questionaire.level1);
+      const level2_ids = oidFilter(questionaire.level2);
+      const level3_ids = oidFilter(questionaire.level3);
+
+      // 数据构造
+      const users = [];
+      const records = [];
+      const orders = []; // 订单
+      innerUsers.forEach(user => {
+        users.push({
+          reward: user.level === 'level2' ? '2' : '3',
+          openid: user.openid,
+          last_login: new Date(),
+        });
+        records.push({
+          openid: user.openid,
+          level1: level1_ids,
+          level2: level2_ids,
+          level3: level3_ids,
+          level1Score: 10,
+          level2Score: 10,
+          level3Score: user.level === 'level2' ? 0 : 10,
+          totalScore: user.level === 'level2' ? 20 : 30,
+          isEnd: true,
+          time: Date.now(),
+          reward: user.level === 'level2' ? '2' : '3',
+        });
+      });
+      await ctx.app.model.User.insertMany(users); // 插入用户信息
+      const recordsResp = await ctx.app.model.Record.insertMany(records); // 插入多条答题记录
+      recordsResp.forEach(record => {
+        innerUsers.forEach(user => {
+          if (record.openid === user.openid) {
+            orders.push({
+              openid: user.openid,
+              name: user.name,
+              phone: user.phone,
+              area: user.area,
+              address: user.address,
+              record: record._id,
+              reward: user.level === 'level2' ? '2' : '3',
+              desc: user.level === 'level2' ? '海兰云天温泉券' : '海兰云天酒店住宿券',
+            });
+          }
+        });
+      });
+
+      // 减库存
+      await ctx.service.commodity.update({
+        index: 3,
+      }, {
+        count: 18,
+      });
+      await ctx.service.commodity.update({
+        index: 2,
+      }, {
+        count: 47,
+      });
+
+      // 插入订单信息
+      await ctx.app.model.Order.insertMany(orders);
+      ctx.body = { code: 0, msg: 'success' };
     }
   }
   return OrderController;

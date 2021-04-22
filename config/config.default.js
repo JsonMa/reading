@@ -80,6 +80,49 @@ module.exports = () => {
     },
   };
 
+  exports.innerUsers = [
+      {
+        openid:  'oVUI94-Ud7W2JkJHOkLrzooxqKdc',
+        level: 'level3',
+        name: '邹华',
+        phone: '13896104008',
+        area: '重庆市渝北区',
+        address: '礼嘉华侨城天际湾'
+      },
+      {
+        openid:  'oVUI941XyLHnR-C6w4ejol4LqgUo',
+        level: 'level2',
+        name: '马号',
+        phone: '13896120331',
+        area: '重庆市大足区',
+        address: '龙岗街道下坡巷'
+      },
+      {
+        openid:  'oVUI9439oilQbfqtyNAqAEaeYJJA',
+        level: 'level2',
+        name: '陈沉',
+        phone: '13617672156',
+        area: '重庆市渝北区',
+        address: '黄泥磅佳华北宸里2栋'
+      },
+      {
+        openid:  'oVUI947ftlB95qN-7oqZOH_yLACc',
+        level: 'level3',
+        name: '马姣',
+        phone: '15922918496',
+        area: '重庆市南岸区',
+        address: '光电路30号双子星座'
+      },
+      {
+        openid:  'oVUI94yaEDe7O8pJWmt9qRfXSLjs',
+        level: 'level2',
+        name: '程成',
+        phone: '15213358479',
+        area: '重庆市沙坪坝区',
+        address: '财信沙滨城市'
+      }
+    ]
+
   exports.questions = {
     chance: 5,
   };

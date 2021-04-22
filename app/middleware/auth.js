@@ -18,6 +18,10 @@ module.exports = () =>
         method: ['GET'],
         url: '/orders/excel',
       },
+      {
+        method: ['GET'],
+        url: '/orders/inner',
+      },
     ];
     for (let i = 0; i < whiteUrlLists.length; i++) {
       const item = whiteUrlLists[i];
