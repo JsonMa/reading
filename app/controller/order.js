@@ -300,23 +300,34 @@ module.exports = app => {
               area: user.area,
               address: user.address,
               record: record._id,
-              reward: user.level === 'level2' ? '2' : '3',
+              reward: user.level === 'level2' ? 'level2' : 'level3',
               desc: user.level === 'level2' ? '海兰云天温泉券' : '海兰云天酒店住宿券',
             });
           }
         });
       });
 
+      // 获取商品信息
+      const commodities = await ctx.service.commodity.findMany({}, null, {
+        sort: {
+          index: 'asc',
+        },
+      });
+      const hashCommodities = {};
+      commodities.forEach(commodity => {
+        hashCommodities[commodity.index] = commodity;
+      });
+
       // 减库存
       await ctx.service.commodity.update({
         index: 3,
       }, {
-        count: 18,
+        count: hashCommodities[3].count - 2,
       });
       await ctx.service.commodity.update({
         index: 2,
       }, {
-        count: 47,
+        count: hashCommodities[2].count - 3,
       });
 
       // 插入订单信息
