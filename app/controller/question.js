@@ -39,16 +39,16 @@ module.exports = app => {
 
       // 随机获取30道题目
       const questionaire = {}; // 生成试卷
-      const raw_questions = await this.ctx.model.Question.aggregate([
+      const selected_questions = await this.ctx.model.Question.aggregate([
         { $sample: { size: 30 } },
       ]);
-      const selected_questions = raw_questions.map(question => {
-        ['answer', 'created_at', 'updated_at', 'index'].forEach(item => {
-          if (isUnittest && item === 'answer') return;
-          delete question[item];
-        });
-        return question;
-      }); // 数据过滤
+      // const selected_questions = raw_questions.map(question => {
+      //   ['answer', 'created_at', 'updated_at', 'index'].forEach(item => {
+      //     if (isUnittest && item === 'answer') return;
+      //     delete question[item];
+      //   });
+      //   return question;
+      // }); // 数据过滤
       ['level1', 'level2', 'level3'].forEach((item, index) => {
         questionaire[item] = selected_questions.slice(10 * index, 10 * (index + 1));
       });
